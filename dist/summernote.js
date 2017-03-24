@@ -1,12 +1,12 @@
 /**
- * Super simple wysiwyg editor v0.8.2
+ * Super simple wysiwyg editor v0.8.2.1
  * http://summernote.org/
  *
  * summernote.js
  * Copyright 2013-2016 Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2016-08-07T05:11Z
+ * Date: 2017-03-24T14:36Z
  */
 (function (factory) {
   /* global define */
@@ -1856,11 +1856,11 @@
     }
   };
 
-  var editor = renderer.create('<div class="note-editor note-frame panel panel-default"/>');
-  var toolbar = renderer.create('<div class="note-toolbar panel-heading"/>');
+  var editor = renderer.create('<div class="note-editor note-frame card"/>');
+  var toolbar = renderer.create('<div class="note-toolbar card-header"/>');
   var editingArea = renderer.create('<div class="note-editing-area"/>');
   var codable = renderer.create('<textarea class="note-codable"/>');
-  var editable = renderer.create('<div class="note-editable panel-body" contentEditable="true"/>');
+  var editable = renderer.create('<div class="note-editable card-block" contentEditable="true"/>');
   var statusbar = renderer.create([
     '<div class="note-statusbar">',
     '  <div class="note-resizebar">',
@@ -1875,7 +1875,7 @@
   var airEditable = renderer.create('<div class="note-editable" contentEditable="true"/>');
 
   var buttonGroup = renderer.create('<div class="note-btn-group btn-group">');
-  var button = renderer.create('<button type="button" class="note-btn btn btn-default btn-sm" tabindex="-1">', function ($node, options) {
+  var button = renderer.create('<button type="button" class="note-btn btn btn-secondary btn-sm" tabindex="-1">', function ($node, options) {
     if (options && options.tooltip) {
       $node.attr({
         title: options.tooltip
@@ -1891,7 +1891,7 @@
     var markup = $.isArray(options.items) ? options.items.map(function (item) {
       var value = (typeof item === 'string') ? item : (item.value || '');
       var content = options.template ? options.template(item) : item;
-      return '<li><a href="#" data-value="' + value + '">' + content + '</a></li>';
+      return '<a href="#" data-value="' + value + '" class="dropdown-item">' + content + '</a>';
     }).join('') : options.items;
 
     $node.html(markup);
@@ -1901,7 +1901,7 @@
     var markup = $.isArray(options.items) ? options.items.map(function (item) {
       var value = (typeof item === 'string') ? item : (item.value || '');
       var content = options.template ? options.template(item) : item;
-      return '<li><a href="#" data-value="' + value + '">' + icon(options.checkClassName) + ' ' + content + '</a></li>';
+      return '<a href="#" data-value="' + value + '" class="dropdown-item">' + icon(options.checkClassName) + ' ' + content + '</a>';
     }).join('') : options.items;
     $node.html(markup);
   });
@@ -2116,7 +2116,7 @@
       },
       style: {
         style: 'Style',
-        normal: 'Normal',
+        p: 'Normal',
         blockquote: 'Quote',
         pre: 'Code',
         h1: 'Header 1',
@@ -4324,6 +4324,10 @@
 
       if (options.onCreateLink) {
         linkUrl = options.onCreateLink(linkUrl);
+      } else {
+        // if url doesn't match an URL schema, set http:// as default
+        linkUrl = /^[A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?/.test(linkUrl) ?
+          linkUrl : 'http://' + linkUrl;
       }
 
       var anchors = [];
@@ -4340,10 +4344,6 @@
       }
 
       $.each(anchors, function (idx, anchor) {
-        // if url doesn't match an URL schema, set http:// as default
-        linkUrl = /^[A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?/.test(linkUrl) ?
-          linkUrl : 'http://' + linkUrl;
-
         $(anchor).attr('href', linkUrl);
         if (isNewWindow) {
           $(anchor).attr('target', '_blank');
@@ -4833,6 +4833,7 @@
 
     this.initialize = function () {
       if (options.airMode || options.disableResizeEditor) {
+        this.destroy();
         return;
       }
 
@@ -5183,7 +5184,7 @@
         return ui.buttonGroup([
           ui.button({
             className: 'dropdown-toggle',
-            contents: ui.icon(options.icons.magic) + ' ' + ui.icon(options.icons.caret, 'span'),
+            contents: ui.icon(options.icons.magic),
             tooltip: lang.style.style,
             data: {
               toggle: 'dropdown'
@@ -5298,7 +5299,7 @@
         return ui.buttonGroup([
           ui.button({
             className: 'dropdown-toggle',
-            contents: '<span class="note-current-fontsize"/>' + ui.icon(options.icons.caret, 'span'),
+            contents: '<span class="note-current-fontsize"/>',
             tooltip: lang.font.size,
             data: {
               toggle: 'dropdown'
@@ -5336,7 +5337,7 @@
             }),
             ui.button({
               className: 'dropdown-toggle',
-              contents: ui.icon(options.icons.caret, 'span'),
+              contents: '',
               tooltip: lang.color.more,
               data: {
                 toggle: 'dropdown'
@@ -5457,7 +5458,7 @@
         return ui.buttonGroup([
           ui.button({
             className: 'dropdown-toggle',
-            contents: ui.icon(options.icons.alignLeft) + ' ' + ui.icon(options.icons.caret, 'span'),
+            contents: ui.icon(options.icons.alignLeft),
             tooltip: lang.paragraph.paragraph,
             data: {
               toggle: 'dropdown'
@@ -5480,7 +5481,7 @@
         return ui.buttonGroup([
           ui.button({
             className: 'dropdown-toggle',
-            contents: ui.icon(options.icons.textHeight) + ' ' + ui.icon(options.icons.caret, 'span'),
+            contents: ui.icon(options.icons.textHeight),
             tooltip: lang.font.height,
             data: {
               toggle: 'dropdown'
@@ -5499,7 +5500,7 @@
         return ui.buttonGroup([
           ui.button({
             className: 'dropdown-toggle',
-            contents: ui.icon(options.icons.table) + ' ' + ui.icon(options.icons.caret, 'span'),
+            contents: ui.icon(options.icons.table),
             tooltip: lang.table.table,
             data: {
               toggle: 'dropdown'
@@ -6461,7 +6462,7 @@
 
       var body = [
         '<p class="text-center">',
-        '<a href="http://summernote.org/" target="_blank">Summernote 0.8.2</a> · ',
+        '<a href="http://summernote.org/" target="_blank">Summernote 0.8.2.1</a> · ',
         '<a href="https://github.com/summernote/summernote" target="_blank">Project</a> · ',
         '<a href="https://github.com/summernote/summernote/issues" target="_blank">Issues</a>',
         '</p>'
@@ -6806,7 +6807,7 @@
 
 
   $.summernote = $.extend($.summernote, {
-    version: '0.8.2',
+    version: '0.8.2.1',
     ui: ui,
     dom: dom,
 
@@ -7010,7 +7011,7 @@
         'outdent': 'note-icon-align-outdent',
         'arrowsAlt': 'note-icon-arrows-alt',
         'bold': 'note-icon-bold',
-        'caret': 'note-icon-caret',
+        'caret': '',
         'circle': 'note-icon-circle',
         'close': 'note-icon-close',
         'code': 'note-icon-code',
