@@ -104,7 +104,7 @@ define([
   });
 
   var popover = renderer.create([
-    '<div class="note-popover popover in" data-animation="false">',
+    '<div class="note-popover popover in hidden" data-animation="false">',
     '  <div class="arrow"/>',
     '  <div class="popover-content note-children-container"/>',
     '</div>'

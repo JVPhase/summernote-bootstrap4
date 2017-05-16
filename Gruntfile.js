@@ -274,7 +274,7 @@ module.exports = function (grunt) {
         destCss: 'src/icons/dist/',
         options: {
           font: 'summernote',
-          template: 'src/icons/templates/summernote.css'
+          template: 'src/icons/templates/summernote.less'
         }
       }
     }
@@ -304,7 +304,7 @@ module.exports = function (grunt) {
   // dist: make dist files
   grunt.registerTask('dist', [
     'clean:dist',
-    'build', 'webfont', 'lint', 'karma:dist',
+    'build', 'webfont', 'lint',
     'copy:dist', 'uglify', 'recess', 'compress'
   ]);
 

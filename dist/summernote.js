@@ -1,12 +1,12 @@
 /**
- * Super simple wysiwyg editor v0.8.2.1
+ * Super simple wysiwyg editor v0.0.3
  * http://summernote.org/
  *
  * summernote.js
  * Copyright 2013-2016 Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2017-03-24T14:36Z
+ * Date: 2017-05-16T13:14Z
  */
 (function (factory) {
   /* global define */
@@ -1881,6 +1881,7 @@
         title: options.tooltip
       }).tooltip({
         container: 'body',
+        animation: false,
         trigger: 'hover',
         placement: 'bottom'
       });
@@ -1929,12 +1930,13 @@
 
     $node.find('.note-color-btn').tooltip({
       container: 'body',
+      animation: false,
       trigger: 'hover',
       placement: 'bottom'
     });
   });
 
-  var dialog = renderer.create('<div class="modal" aria-hidden="false" tabindex="-1"/>', function ($node, options) {
+  var dialog = renderer.create('<div class="modal" data-animation="false" aria-hidden="false" tabindex="-1"/>', function ($node, options) {
     if (options.fade) {
       $node.addClass('fade');
     }
@@ -1957,7 +1959,7 @@
   });
 
   var popover = renderer.create([
-    '<div class="note-popover popover in">',
+    '<div class="note-popover popover in hidden" data-animation="false">',
     '  <div class="arrow"/>',
     '  <div class="popover-content note-children-container"/>',
     '</div>'
@@ -6462,7 +6464,7 @@
 
       var body = [
         '<p class="text-center">',
-        '<a href="http://summernote.org/" target="_blank">Summernote 0.8.2.1</a> · ',
+        '<a href="http://summernote.org/" target="_blank">Summernote 0.0.3</a> · ',
         '<a href="https://github.com/summernote/summernote" target="_blank">Project</a> · ',
         '<a href="https://github.com/summernote/summernote/issues" target="_blank">Issues</a>',
         '</p>'
@@ -6807,7 +6809,7 @@
 
 
   $.summernote = $.extend($.summernote, {
-    version: '0.8.2.1',
+    version: '0.0.3',
     ui: ui,
     dom: dom,
 
