@@ -26,6 +26,7 @@ define([
         title: options.tooltip
       }).tooltip({
         container: 'body',
+        animation: false,
         trigger: 'hover',
         placement: 'bottom'
       });
@@ -74,6 +75,7 @@ define([
 
     $node.find('.note-color-btn').tooltip({
       container: 'body',
+      animation: false,
       trigger: 'hover',
       placement: 'bottom'
     });
