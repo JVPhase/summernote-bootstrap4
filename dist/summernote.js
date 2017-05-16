@@ -1,12 +1,12 @@
 /**
- * Super simple wysiwyg editor v0.0.3
+ * Super simple wysiwyg editor v0.0.5
  * http://summernote.org/
  *
  * summernote.js
  * Copyright 2013-2016 Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license./
  *
- * Date: 2017-05-16T13:14Z
+ * Date: 2017-05-16T13:17Z
  */
 (function (factory) {
   /* global define */
@@ -1857,7 +1857,7 @@
   };
 
   var editor = renderer.create('<div class="note-editor note-frame card"/>');
-  var toolbar = renderer.create('<div class="note-toolbar card-header"/>');
+  var toolbar = renderer.create('<div class="note-toolbar btn-toolbar card-header justify-content-between" role="toolbar"/>');
   var editingArea = renderer.create('<div class="note-editing-area"/>');
   var codable = renderer.create('<textarea class="note-codable"/>');
   var editable = renderer.create('<div class="note-editable card-block" contentEditable="true"/>');
@@ -6464,7 +6464,7 @@
 
       var body = [
         '<p class="text-center">',
-        '<a href="http://summernote.org/" target="_blank">Summernote 0.0.3</a> · ',
+        '<a href="http://summernote.org/" target="_blank">Summernote 0.0.5</a> · ',
         '<a href="https://github.com/summernote/summernote" target="_blank">Project</a> · ',
         '<a href="https://github.com/summernote/summernote/issues" target="_blank">Issues</a>',
         '</p>'
@@ -6809,7 +6809,7 @@
 
 
   $.summernote = $.extend($.summernote, {
-    version: '0.0.3',
+    version: '0.0.5',
     ui: ui,
     dom: dom,
 

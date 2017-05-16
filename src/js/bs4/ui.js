@@ -2,7 +2,7 @@ define([
   'summernote/base/renderer'
 ], function (renderer) {
   var editor = renderer.create('<div class="note-editor note-frame card"/>');
-  var toolbar = renderer.create('<div class="note-toolbar card-header"/>');
+  var toolbar = renderer.create('<div class="note-toolbar btn-toolbar card-header justify-content-between" role="toolbar"/>');
   var editingArea = renderer.create('<div class="note-editing-area"/>');
   var codable = renderer.create('<textarea class="note-codable"/>');
   var editable = renderer.create('<div class="note-editable card-block" contentEditable="true"/>');
